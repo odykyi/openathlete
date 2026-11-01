@@ -10,6 +10,9 @@ export default defineConfig({
   forbidOnly: isCI,
   retries: isCI ? 1 : 0,
   workers: isCI ? 2 : undefined,
+  // The CI report is published as a page (pages.flisk.si): leave out the
+  // commit's author and committer, so no one's email ends up on it
+  captureGitInfo: { commit: false },
   reporter: isCI
     ? [['github'], ['html', { open: 'never' }]]
     : [['list'], ['html', { open: 'never' }]],
